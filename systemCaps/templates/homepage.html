@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .header {
+            background: #33beff;
+            color: white;
+            padding: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative; /* Allows absolute positioning inside */
+        }
+        .header .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-left: 20px;
+        }
+        .header .buttons {
+            margin-right: 20px;
+        }
+        .header button {
+            background: #335bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin: 0 5px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .header button:hover {
+            background: #334bdf;
+        }
+        .map {
+            margin-top: 10px; /* Adjusted to move the map up */
+            width: 100%;
+            height: 300px;
+            margin-left: auto;
+            margin-right: auto;
+        }    
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 300px;
+            text-align: center;
+        }
+        .close-btn {
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .input-group {
+            margin: 10px 0;
+        }
+        .input-group label {
+            display: block;
+            font-weight: bold;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .modal button[type="submit"] {
+            background: #335bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .modal button[type="submit"]:hover {
+            background: #334bdf;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">Water Refilling</div>
+        <div class="buttons">
+            <button onclick="openLoginModal()">Login</button>
+            <button onclick="location.href='register.html'">Register</button>
+        </div>
+    </div>
+    <div class="map">
+        <img src="images/logo.png" alt="Logo">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d30935.16024104058!2d121.3682504108398!3d14.259343600000014!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x3397e3849f01fc1f%3A0xb59d2495fa701766!2s7C53%2BPP%20Naturral%20Water%20Refilling%20Station%2C%20Santa%20Cruz%2C%20Laguna!3m2!1d14.2593441!2d121.40429909999999!5e0!3m2!1sen!2sph!4v1739769954286!5m2!1sen!2sph" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <h2>Login</h2>
+            <form method="POST" action="{{ url_for('login') }}">
+                <div class="input-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" name="login-email" id="login-email" placeholder="Enter your email" required />
+                </div>
+                <div class="input-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" name="login-password" id="login-password" placeholder="Enter your password" required />
+                </div>
+                <button type="submit">Login</button>
+            </form>
+            <p class="form-text">Don't have an account? <a href="{{ url_for('register') }}">Register</a></p>
+            <button class="close-btn" onclick="closeLoginModal()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Function to open the login modal
+        function openLoginModal() {
+            document.getElementById("loginModal").style.display = "flex";
+        }
+
+        // Function to close the login modal
+        function closeLoginModal() {
+            document.getElementById("loginModal").style.display = "none";
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            let modal = document.getElementById("loginModal");
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
